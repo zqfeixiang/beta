@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:property-placeholder location="classpath:config.properties"/>
+    <context:annotation-config />
+
+	<bean name="propertiesBean" class="config.PropertiesBean">
+		<property name="consumerConfig">
+			<map>
+				<entry key="bootstrap.servers" value="${kafka.bootstrap.servers}" />
+				<entry key="group.id" value="${consumer.group.id}" />
+				<entry key="enable.auto.commit" value="false" />
+				<entry key="auto.commit.interval.ms" value="1000" />
+				<entry key="key.deserializer"
+					value="org.apache.kafka.common.serialization.StringDeserializer" />
+				<entry key="value.deserializer"
+					value="org.apache.kafka.common.serialization.StringDeserializer" />
+				<entry key="auto.offset.reset" value="latest" />
+				<entry key="request.timeout.ms" value="${kafka.request.timeout.ms}" />
+				<entry key="session.timeout.ms" value="${kafka.session.timeout.ms}" />
+				<entry key="max.partition.fetch.bytes" value="${max.partition.fetch.bytes}"/>
+			</map>
+		</property>
+		<property name="producerConfig">
+			<map>
+				<entry key="bootstrap.servers" value="${kafka.bootstrap.servers}" />
+				<entry key="key.serializer"
+					value="org.apache.kafka.common.serialization.StringSerializer" />
+				<entry key="value.serializer"
+					value="org.apache.kafka.common.serialization.StringSerializer" />
+			</map>
+		</property>
+		<property name="heartbeatInterval">
+			<value>30</value>
+		</property>
+		<property name="timeOut">
+			<value>${timeOut}</value>
+		</property>
+		<property name="statisticsInfoInterval">
+			<value>${statisticsInfoInterval}</value>
+		</property>
+		<property name="statisticsInfoCount">
+			<value>${statisticsInfoCount}</value>
+		</property>
+		<property name="restartRefreshInterval">
+			<value>5</value>
+		</property>
+		<property name="taskExecutorConfig">
+			<map>
+				<entry key="maxPoolSize" value="${tp.maxPoolSize}" />
+				<entry key="corePoolSize" value="${tp.corePoolSize}" />
+				<entry key="allowCoreThreadTimeOut" value="${tp.allowCoreThreadTimeOut}" />
+				<entry key="queueCapacity" value="${tp.queueCapacity}" />
+			</map>
+		</property>
+		<property name="exceptionConfig">
+			<map>
+				<entry key="warnTimes" value="${exception.warnTimes}" />
+				<entry key="errorTimes" value="${exception.errorTimes}" />
+			</map>
+		</property>
+		
+		<property name="invalidTopic">
+			<value>${invalidTopic}</value>
+		</property>
+		<property name="infoTopic">
+			<value>${infoTopic}</value>
+		</property>
+		
+		<!-- 主备参数(仅汇总用) -->
+		<property name="standbyConfig">
+			<map>
+				<!-- zk服务器列表 -->
+				<entry key="standby.connectString" value="${standby.connectString}"/>
+				<!-- 会话超时(默认为60000)：zk等待客户端通信的最长时间 -->
+				<entry key="standby.sessionTimeoutMs" value="${standby.sessionTimeoutMs}"/>
+				<!-- 连接超时（默认为15000） -->
+				<entry key="standby.connectionTimeoutMs" value="${standby.connectionTimeoutMs}"/>
+				<!-- 主节点路径 -->
+				<entry key="standby.latchPath" value="${standby.latchPath}"/>
+				<!-- 重连配置 -->
+				<!-- 重连等待时间 -->
+				<entry key="standby.baseSleepTimeMs" value="${standby.baseSleepTimeMs}"/>
+				<!-- 重连次数 -->
+				<entry key="standby.maxRetries" value="${standby.maxRetries}"/>
+			</map>
+		</property>
+		
+		<!-- 仅hdfs用 -->
+		<property name="hdfsConfig">
+			<map>
+				<entry key="fs.defaultFS" value="${hdfs.defaultFS}" />
+				<entry key="dfs.nameservices" value="${hdfs.nameservices}" />
+				<entry key="${hdfs.namenodes.cluster.key}" value="${hdfs.namenodes.cluster}" />
+				<entry key="${hdfs.namenode1.key}" value="${hdfs.namenode1.ip}" />
+				<entry key="${hdfs.namenode2.key}" value="${hdfs.namenode2.ip}" />
+				<entry key="${hdfs.failover.proxy.provider.key}"
+					value="org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider" />
+				<entry key="hdfs.fileExtendName" value="${hdfs.fileExtendName}" />
+				<entry key="hdfs.maxFileLength" value="${hdfs.maxFileLength}" />
+				<entry key="separator" value="${hdfs.separator}"></entry>
+			</map>
+		</property>
+
+		<!-- 仅ElasticSearch用 -->
+		<property name="esConfig">
+			<map>
+				<entry key="cluster.name" value="${es.cluster.name}" />
+				<entry key="cluster.nodes" value="${es.cluster.nodes}" />
+				<entry key="client.transport.sniff" value="${es.client.transport.sniff}" />
+				<entry key="flush.docnum" value="${es.flush.docnum}" />
+				<entry key="flush.interval" value="${es.flush.interval}" />
+				<entry key="flush.size" value="${es.flush.size}" />
+				<entry key="concurrent.requests" value="${es.concurrent.requests}"></entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 仅hdfs不用 -->
+	<!--<bean id="customDecryptServiceUtil"
+		  class="com.bocsoft.pomp.pomp_framework_service.utils.CustomDecryptServiceUtil"
+		  init-method="initDecipher">
+		<property name="decryptProperties">
+			<map>
+				<entry>
+					<key>
+						<value>mongo.client.passwd</value>
+					</key>
+					<value>${mongo.client.passwd}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>-->
+	<!--<bean id="decryptServiceUtil"
+		class="com.bocsoft.pomp.pomp_framework_service.utils.DecryptServiceUtil"
+		init-method="initDecipher">
+		<property name="decryptProperties">
+			<map>
+				<entry>
+					<key>
+						<value>mongo.client.user</value>
+					</key>
+					<value>${mongo.client.user}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>-->
+
+</beans>
