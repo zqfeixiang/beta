@@ -1,0 +1,13 @@
+server:
+  port: 9089
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/pomp_test?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: password01!
+
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: com.dong.beta.dao.domain
