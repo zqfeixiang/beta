@@ -9,6 +9,7 @@
         <module>beta-dao</module>
         <module>beta-web</module>
         <module>beta-java</module>
+        <module>beta-common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -29,6 +30,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.example.beta</groupId>
+                <artifactId>beta-common</artifactId>
+                <version>${beta.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.example.beta</groupId>
                 <artifactId>beta-biz</artifactId>
@@ -63,6 +69,13 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
+            </dependency>
+
+            <!--guava-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>27.1-jre</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

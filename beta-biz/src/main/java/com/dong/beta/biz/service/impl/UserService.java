@@ -1,12 +1,18 @@
 package com.dong.beta.biz.service.impl;
 
 import com.dong.beta.dao.domain.User;
+import com.dong.beta.dao.domain.Users;
+import com.dong.beta.dao.domain.UsersCriteria;
 import com.dong.beta.dao.mapper.UserDao;
+import com.dong.beta.dao.mapper.UsersMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,20 +20,28 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    UsersMapper usersMapper;
+
+
 
     /**
      * 根据名字查找用户
      */
-    public User selectUserByName(String name) {
-        return userDao.findUserByName(name);
+    public List<Users> selectUserByName(String userName) {
+        UsersCriteria example = new UsersCriteria();
+        UsersCriteria.Criteria criteria = example.createCriteria();
+        if(!StringUtils.isEmpty(userName)){
+            userName = "%" + userName + "%";
+            criteria.andUsernameLike(userName);
+        }
+        List<Users> userList = usersMapper.selectByExample(example);
+        if (!CollectionUtils.isEmpty(userList)){
+            return userList;
+        }
+        return null;
     }
 
-    /**
-     * 查找所有用户
-     */
-    public List<User> selectAllUser() {
-        return userDao.findAllUser();
-    }
 
     /**
      * 插入两个用户

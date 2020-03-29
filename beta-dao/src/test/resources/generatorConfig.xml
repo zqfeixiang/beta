@@ -49,7 +49,8 @@
         </javaClientGenerator>
 
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table tableName="parse_rule" domainObjectName="ParseRule"></table>
+        <!--<table tableName="parse_rule" domainObjectName="ParseRule"></table>-->
+        <table tableName="users" domainObjectName="Users"></table>
 
 
     </context>
