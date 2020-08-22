@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.beta.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.dong.beta.controller.domain.Users">
+    <id column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="jobNum" jdbcType="VARCHAR" property="jobnum" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="team" jdbcType="VARCHAR" property="team" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="product" jdbcType="VARCHAR" property="product" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="loginTime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="note1" jdbcType="VARCHAR" property="note1" />
+    <result column="note2" jdbcType="VARCHAR" property="note2" />
+  </resultMap>
+
+  <select id="selectByUserName" resultType="com.dong.beta.controller.domain.Users">
+    select * from users where username like CONCAT(CONCAT('%',#{userName}),'%')
+  </select>
+
+  <update id="updateByUserName">
+    update users set department=#{users.department}, team = #{users.team} where username = #{users.username}
+  </update>
+
+</mapper>

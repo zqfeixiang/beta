@@ -20,6 +20,8 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JUnitTest {
 
@@ -95,5 +97,12 @@ public class JUnitTest {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void tets(){
+        Map<String, Object> map =new HashMap<>();
+        map.put("aa", "dong");
+        System.out.println(map.get("bb") == null);
     }
 }

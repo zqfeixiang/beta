@@ -1,0 +1,32 @@
+server:
+  port: 9090
+
+#redis集群
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/pomp_test?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: password01!
+  application:
+    name: beta-spring
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.dong.beta.controller.domain
+
+
+logging:
+  level:
+    com.dong.beta.mapper: debug

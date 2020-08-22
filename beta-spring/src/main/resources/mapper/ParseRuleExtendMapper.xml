@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.beta.mapper.ParseRuleExtendMapper">
+
+  <update id="updateRuleStatus">
+    update parse_rule set rule_status=#{rule_status} where id=#{id}
+  </update>
+
+</mapper>

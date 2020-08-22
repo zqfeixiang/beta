@@ -10,6 +10,7 @@
         <module>beta-web</module>
         <module>beta-java</module>
         <module>beta-common</module>
+        <module>beta-spring</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -69,6 +70,13 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+
+            <!--rabbitmq-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
             </dependency>
 
             <!--guava-->

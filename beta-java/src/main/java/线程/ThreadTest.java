@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 public class ThreadTest {
     @Test
@@ -139,5 +140,12 @@ public class ThreadTest {
             });
         }
         Thread.sleep(2000);
+    }
+
+    @Test
+    public void testThreadName(){
+        IntStream.range(0, 5).boxed().
+                map(i -> new Thread(() -> System.out.println(Thread.currentThread().getName())))
+                .forEach(Thread::start);
     }
 }
