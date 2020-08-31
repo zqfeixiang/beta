@@ -36,8 +36,9 @@ public class UserController {
     }
 
     @RequestMapping("/updateByUserName")
-    public ResponseModel<Void> update(@RequestBody Users users){
-        userService.updateByUserName(users);
-        return ResponseModel.successResponse(null);
+    public ResponseModel<Users> update(@RequestBody Users users){
+        DataListDTO dataListDTO = new DataListDTO();
+        dataListDTO.setDataList(userService.updateByUserName(users));
+        return ResponseModel.successResponse(dataListDTO);
     }
 }

@@ -5,9 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>beta-biz</module>
-        <module>beta-dao</module>
-        <module>beta-web</module>
         <module>beta-java</module>
         <module>beta-common</module>
         <module>beta-spring</module>

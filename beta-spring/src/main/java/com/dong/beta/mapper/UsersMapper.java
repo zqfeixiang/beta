@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface UsersMapper {
 
-    List<Users> selectByUserName(@Param("userName") String userName);
+    List<Users> selectByUserName(@Param("username") String username);
 
     void updateByUserName(@Param("users") Users users);
+
+    void deleteByUserName(@Param("username") String username);
 }

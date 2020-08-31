@@ -21,6 +21,8 @@ public class TestRedis {
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    RedisTemplate<Object, Object> myRedisTemplate;
 
     @Test
     public void test() throws Exception {
@@ -31,7 +33,7 @@ public class TestRedis {
     @Test
     public void testObj() throws Exception {
         Users user=new Users("test1234", "testuser", "测试部");
-        ValueOperations<String, Users> operations=redisTemplate.opsForValue();
+        ValueOperations<Object, Object> operations=myRedisTemplate.opsForValue();
         operations.set("com.dong", user);
         operations.set("com.dong.f", user,15, TimeUnit.SECONDS);
         Thread.sleep(1000);

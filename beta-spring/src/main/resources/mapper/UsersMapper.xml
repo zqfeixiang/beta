@@ -18,11 +18,14 @@
   </resultMap>
 
   <select id="selectByUserName" resultType="com.dong.beta.controller.domain.Users">
-    select * from users where username like CONCAT(CONCAT('%',#{userName}),'%')
+    select * from users where username like CONCAT(CONCAT('%',#{username}),'%')
   </select>
 
   <update id="updateByUserName">
-    update users set department=#{users.department}, team = #{users.team} where username = #{users.username}
+    update users set department=#{users.department}, team = #{users.team} where username like CONCAT(CONCAT('%',#{users.username}),'%')
   </update>
 
+  <delete id="deleteByUserName">
+    delete from users where username = #{username}
+  </delete>
 </mapper>

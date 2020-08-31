@@ -26,7 +26,14 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.dong.beta.controller.domain
 
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
 
-logging:
-  level:
-    com.dong.beta.mapper: debug
+#
+#logging:
+#  level:
+#    com.dong.beta.mapper: debug
