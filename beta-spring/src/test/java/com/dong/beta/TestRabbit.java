@@ -2,7 +2,6 @@ package com.dong.beta;
 
 import com.dong.beta.entity.Book;
 
-import org.assertj.core.util.Maps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -17,8 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.HashMap;
 import java.util.Map;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TestRabbit {
     @Autowired
     RabbitTemplate rabbitTemplate;

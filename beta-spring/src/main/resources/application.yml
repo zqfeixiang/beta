@@ -21,17 +21,31 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+
+article:
+   id: 1
+   author: dzq
+   title: Hello
+   content: hello world
+
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.dong.beta.controller.domain
 
-management:
-  endpoints:
-    web:
-      base-path: /actuator
-      exposure:
-        include: "*"
+
+#management:
+#  endpoints:
+#    web:
+#      base-path: /actuator
+#      exposure:
+#        include: "*"
 
 #
 #logging:
