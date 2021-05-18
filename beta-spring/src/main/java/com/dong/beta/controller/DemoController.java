@@ -14,6 +14,19 @@ import java.util.List;
 @RequestMapping("demo")
 public class DemoController {
 
+    static Integer c = 0;
+
+    @RequestMapping("/stat")
+    public Integer stat(){
+        return c;
+    }
+
+    @RequestMapping("/add")
+    public Integer add(){
+        c++;
+        return 1;
+    }
+
     @Autowired
     private DemoService demoService;
 

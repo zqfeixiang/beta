@@ -5,10 +5,13 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
@@ -23,6 +26,7 @@ public class LambdaTest {
             new Employee("aa", 40, 19999.8),
             new Employee("dd", 30, 9999.8),
             new Employee("ee", 32, 10999.8),
+            new Employee("aa", 50, 99999.8),
             new Employee("bb", 28, 20999.8));
 
     public static void main(String[] args) {
@@ -30,6 +34,22 @@ public class LambdaTest {
 //        sort();
 //        test2();
         System.out.println(new Random().nextInt(100));
+
+        Map<String, Integer> collect = employees.stream().filter(employee -> employee.getAge() > 30)
+                .collect(Collectors.toMap(Employee::getName, Employee::getAge, (e1, e2) -> e1));
+
+        List<Employee> collect1 = employees.parallelStream().sorted(Comparator.comparing(Employee::getAge).reversed()).collect(Collectors.toList());
+        List<Employee> collect2 = employees.parallelStream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
+        Set<String> collect3 = employees.parallelStream().map(Employee::getName).collect(Collectors.toSet());
+        List<Employee> collect4 = employees.parallelStream().sorted(Comparator.comparing(Employee::getSalary, Double::compareTo).reversed()).collect(Collectors.toList());
+
+        System.out.println(collect);
+        System.out.println(collect1);
+        System.out.println(collect2);
+        System.out.println(collect3);
+        System.out.println(collect4);
+
+
     }
 
     public static void test2(){

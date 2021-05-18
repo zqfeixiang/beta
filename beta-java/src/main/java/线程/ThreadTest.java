@@ -14,6 +14,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class ThreadTest {
+
+    @Test
+    public void test2(){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName());
+            }
+        });
+        System.out.println(t.getState());
+        t.start();
+        System.out.println(t.getState());
+
+    }
+
     @Test
     public void test() throws InterruptedException {
         new Thread(() -> {

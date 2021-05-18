@@ -1,4 +1,4 @@
-package com.dong.beta.pattern.proxy;
+package pattern.proxy;
 
 public class Client {
     public static void main(String[] args) {

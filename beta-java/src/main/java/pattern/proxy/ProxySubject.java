@@ -1,4 +1,4 @@
-package com.dong.beta.pattern.proxy;
+package pattern.proxy;
 
 public class ProxySubject implements Subject{
     private RealSubject realSubject;
