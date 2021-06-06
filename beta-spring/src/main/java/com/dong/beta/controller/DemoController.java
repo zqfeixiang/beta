@@ -1,6 +1,7 @@
 package com.dong.beta.controller;
 
 import com.dong.beta.controller.domain.ParseRule;
+import com.dong.beta.service.AsyncService;
 import com.dong.beta.service.DemoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,15 @@ import java.util.List;
 public class DemoController {
 
     static Integer c = 0;
+    @Autowired
+    private DemoService demoService;
+    @Autowired
+    AsyncService asyncService;
+
+    @RequestMapping("/async")
+    public void async(){
+        asyncService.executeAsync();
+    }
 
     @RequestMapping("/stat")
     public Integer stat(){
@@ -27,8 +37,6 @@ public class DemoController {
         return 1;
     }
 
-    @Autowired
-    private DemoService demoService;
 
     @GetMapping("test")
     public List<ParseRule> test(){

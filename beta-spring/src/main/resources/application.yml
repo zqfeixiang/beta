@@ -27,6 +27,15 @@ spring:
     username: guest
     password: guest
 
+async:
+  executor:
+    thread:
+      core_pool_size: 5
+      max_pool_size: 10
+      queue_capacity: 10
+      name:
+        prefix: async-service-
+
 
 article:
    id: 1
