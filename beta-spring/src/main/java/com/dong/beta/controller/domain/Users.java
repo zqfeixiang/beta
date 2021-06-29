@@ -6,10 +6,12 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(indexName = "users")
 public class Users implements Serializable {
     private Integer userid;
 

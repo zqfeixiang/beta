@@ -10,6 +10,8 @@ spring:
     password: password01!
   application:
     name: beta-spring
+  main:
+    allow-bean-definition-overriding: true
   redis:
     database: 0
     host: localhost
@@ -26,6 +28,9 @@ spring:
     port: 5672
     username: guest
     password: guest
+  elasticsearch:
+    cluster-nodes: 127.0.0.1:9300
+    cluster-name: docker-cluster
 
 async:
   executor:

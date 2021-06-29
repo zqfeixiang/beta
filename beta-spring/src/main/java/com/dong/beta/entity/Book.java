@@ -17,13 +17,10 @@ public class Book {
     @Id
     private String id;
 
-    @Field(type = FieldType.String)
     private String name;
 
-    @Field(type = FieldType.String)
     private String summary;
 
-    @Field(type = FieldType.Integer)
     private Integer price;
 
 }
