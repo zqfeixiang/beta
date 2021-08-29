@@ -29,7 +29,7 @@ public class UserService {
      * 根据名字查找用户
      *  keyGenerator = "myKeyGenerator"
      */
-    @Cacheable(/*cacheNames = {"users"},*/ key = "#root.args[0]")
+//    @Cacheable(/*cacheNames = {"users"},*/ key = "#root.args[0]")
     public List<Users> selectUserByName(String userName) {
         List<Users> userList = usersMapper.selectByUserName(userName);
         if (!CollectionUtils.isEmpty(userList)){

@@ -1,4 +1,4 @@
-package constants;
+package com.dong.beta.constants;
 
 public enum ResultCodeEnum {
 

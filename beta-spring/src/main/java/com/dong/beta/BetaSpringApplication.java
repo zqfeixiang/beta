@@ -1,15 +1,14 @@
 package com.dong.beta;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/06/28
  */
 
-@SpringBootApplication()
+@SpringBootApplication
 @MapperScan("com.dong.beta.mapper")
 @RestController
 @EnableScheduling
 @EnableCaching
+@EnableTransactionManagement
 //@EnableRabbit
 @EnableAsync
 public class BetaSpringApplication {

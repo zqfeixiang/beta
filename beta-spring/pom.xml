@@ -10,21 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>beta-spring</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
 
     <dependencies>
         <dependency>
             <groupId>com.example.beta</groupId>
-            <artifactId>beta-biz</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.example.beta</groupId>
-            <artifactId>beta-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.example.beta</groupId>
-            <artifactId>beta-dao</artifactId>
-            <version>${beta.version}</version>
+            <artifactId>common-redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -43,6 +36,10 @@
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
         <!-- Spring Cache -->
         <dependency>
@@ -81,6 +78,10 @@
             <version>28.2-jre</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,12 +94,15 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <!--rabbit-->
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-            <version>2.2.1.RELEASE</version>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <!--dubbo-->
@@ -116,7 +120,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>RELEASE</version>
+            <version>1.2.75</version>
         </dependency>
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>
@@ -135,124 +139,13 @@
             <version>5.3.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>com.github.wvengen</groupId>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <version>2.0.14</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <proguardVersion>6.0.2</proguardVersion>
-                    <injar>${project.build.finalName}.jar</injar>
-
-                    <outjar>${project.build.finalName}.jar</outjar>
-
-                    <outjar>${project.build.finalName}.jar</outjar>
-                    <obfuscate>true</obfuscate>
-                    <options>
-                        <!--# JDK目标版本1.8-->
-                        <option>-target 1.8</option>
-                        <!-- 不做收缩（删除注释、未被引用代码）-->
-                        <option>-dontshrink</option>
-                        <!-- 不做优化（变更代码实现逻辑）-->
-                        <option>-dontoptimize</option>
-                        <!--  ##对于类成员的命名的混淆采取唯一策略-->
-                        <option>-useuniqueclassmembernames</option>
-                        <!--## 混淆类名之后，对使用Class.forName('className')之类的地方进行相应替代-->
-                        <option>-adaptclassstrings</option>
-                        <!--混淆时不生成大小写混合的类名，默认是可以大小写混合-->
-                        <option>-dontusemixedcaseclassnames</option>
-                        <!--忽略警告-->
-                        <option>-ignorewarnings</option>
-                        <!-- This option will replace all strings in reflections method invocations with new class names.
-                             For example, invokes Class.forName('className')-->
-                        <!-- <option>-adaptclassstrings</option> -->
-                        <!-- This option will save all original annotations and etc. Otherwise all we be removed from files.-->
-                        <!-- 不混淆所有特殊的类-->
-                        <option>-keepattributes Exceptions,InnerClasses,Signature,Deprecated,
-                            SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
-                        </option>
-                        <!-- This option will save all original names in interfaces (without obfuscate).-->
-                        <!--
-                                     <option>-keepnames interface **</option>
-                        -->
-                        <!-- This option will save all original methods parameters in files defined in -keep sections,
-                             otherwise all parameter names will be obfuscate.-->
-
-                        <!--保留参数名字-->
-                        <option>-keepparameternames</option>
-                        <!--保留主进程入口-->
-                        <!--
-                                    <option>-keep @org.springframework.boot.autoconfigure.SpringBootApplication class * {*;}</option>
-                        -->
-                        <!-- <option>-libraryjars **</option> -->
-                        <!-- This option will save all original class files (without obfuscate) but obfuscate all in domain package.-->
-                        <!--<option>-keep class !com.slm.proguard.example.spring.boot.domain.** { *; }</option>-->
-
-                        <!--
-                                    <option>-keep class !com.bmsoft.graph.** { *; }</option>
-                        -->
-                        <option>-keep class com.bmsoft.graph.config.** { *; }</option>
-                        <option>-keep class com.bmsoft.graph.LinkGraphApplication { *; }</option>
-                        <option>-keep class com.bmsoft.graph.mapper.** { *; }</option>
-                        <!--
-                                    <option>-keep class com.bmsoft.graph.auth.filter.** { *; }</option>
-                        -->
-                        <option>-keep class com.bmsoft.graph.aspect.** { *; }</option>
-                        <option>-keep class com.bmsoft.graph.domain.** { *; }</option>
-                        <option>-keep class com.bmsoft.graph.controller.** { *; }</option>
-                        <!--
-                                    <option>-keep interface * extends * { *; }</option>
-                        -->
-                        <!--##保留枚举成员及方法-->
-                        <option> -keepclassmembers enum * { *; }</option>
-                        <option>-keepclassmembers class * {
-                            <!-- @org.springframework.beans.factory.annotation.Autowired *; -->
-                            @org.springframework.beans.factory.annotation.Autowired *;
-                            @org.springframework.beans.factory.annotation.Value *;
-                            }
-                        </option>
-                    </options>
-                    <libs>
-                        <!-- Include main JAVA library required.-->
-                        <lib>${java.home}/lib/rt.jar</lib>
-                    </libs>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.proguard</groupId>
-                        <artifactId>proguard-base</artifactId>
-                        <version>6.0.3</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>com.dong.beta.web.BetaWebApplication</mainClass>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

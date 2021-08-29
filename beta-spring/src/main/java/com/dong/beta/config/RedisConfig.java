@@ -1,5 +1,8 @@
 package com.dong.beta.config;
 
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -40,5 +43,12 @@ public class RedisConfig extends CachingConfigurerSupport {
         Jackson2JsonRedisSerializer jackson = new Jackson2JsonRedisSerializer<Object>(Object.class);
         template.setDefaultSerializer(jackson);
         return template;
+    }
+
+    @Bean
+    public Redisson redisson(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://localhost:6379").setDatabase(0);
+        return (Redisson) Redisson.create(config);
     }
 }

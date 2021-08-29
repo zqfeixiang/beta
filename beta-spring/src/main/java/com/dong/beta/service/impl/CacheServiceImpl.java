@@ -1,5 +1,6 @@
 package com.dong.beta.service.impl;
 
+import com.dong.aop.DLock;
 import com.dong.beta.mapper.UsersMapper;
 import com.dong.beta.service.CacheService;
 import com.dong.beta.service.DemoService;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CacheServiceImpl implements CacheService {
 
-    @Resource(name = "demoservice")
+    @Resource(name = "demoService")
     DemoService demoService;
 
     @Autowired
@@ -42,8 +43,9 @@ public class CacheServiceImpl implements CacheService {
 
     private List<Map<String, String>> userNameCacheList = Lists.newArrayList();
 
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0 0/5 * * * ?")
     @PostConstruct
+    @DLock("dong")
     @Override
     public void init() {
         CompletableFuture.runAsync(() -> {

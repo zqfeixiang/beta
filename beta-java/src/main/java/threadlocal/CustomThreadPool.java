@@ -1,13 +1,8 @@
 package threadlocal;
 
-import com.alibaba.ttl.spi.TtlEnhanced;
 import com.alibaba.ttl.threadpool.TtlExecutors;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.*;
-
-import static org.springframework.transaction.annotation.Propagation.*;
 
 public class CustomThreadPool {
     private static final int CORE_POOL_SIZE = 50;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("demoService")
 public class DemoServiceImpl implements DemoService {
 
     @Autowired

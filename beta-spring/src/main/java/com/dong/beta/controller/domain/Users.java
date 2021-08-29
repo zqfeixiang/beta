@@ -3,6 +3,7 @@ package com.dong.beta.controller.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "users")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Users implements Serializable {
     private Integer userid;
 

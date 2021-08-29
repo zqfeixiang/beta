@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BondCodeUtil {
 
-    private static List<String> convertList = Arrays.asList("bondCode", "securidMain", "bondCodeList");
+    private static List<String> convertList = Arrays.asList("bondCode", "securidMain");
 
     private static final String BOND_SEPARATOR = ",";
     private static final String WD_SH = ".SH";

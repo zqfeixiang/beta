@@ -17,8 +17,14 @@
     <result column="note2" jdbcType="VARCHAR" property="note2" />
   </resultMap>
 
+  <sql id="column">
+    userid, username, name, jobNum, department, team, createTime
+  </sql>
+
   <select id="selectByUserName" resultType="com.dong.beta.controller.domain.Users">
-    select * from users where username like CONCAT(CONCAT('%',#{username}),'%')
+    select
+    <include refid="column"></include>
+    from users where username like CONCAT(CONCAT('%',#{username}),'%')
   </select>
 
   <update id="updateByUserName">
@@ -28,4 +34,8 @@
   <delete id="deleteByUserName">
     delete from users where username = #{username}
   </delete>
+
+  <select id="getUserIdNameMap" resultType="map">
+    select username, name, department from pomp_test.users where name is not null
+  </select>
 </mapper>

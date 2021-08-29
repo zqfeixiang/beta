@@ -33,21 +33,6 @@
                 <artifactId>beta-common</artifactId>
                 <version>${beta.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.example.beta</groupId>
-                <artifactId>beta-biz</artifactId>
-                <version>${beta.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.example.beta</groupId>
-                <artifactId>beta-dao</artifactId>
-                <version>${beta.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.example.beta</groupId>
-                <artifactId>beta-web</artifactId>
-                <version>${beta.version}T</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -97,14 +82,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
