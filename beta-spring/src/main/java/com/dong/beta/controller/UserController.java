@@ -9,7 +9,10 @@ import com.dong.beta.entity.DataListDTO;
 import com.dong.beta.service.CacheService;
 import com.dong.beta.service.impl.UserService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -21,6 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
@@ -33,7 +37,8 @@ public class UserController {
 
     @RequestMapping("/test")
     public void test(){
-        System.out.println(articleConfig);
+        log.info("test");
+        log.info("articleConfig:{}", articleConfig);
     }
 
     @GetMapping("/listAllUsers")
