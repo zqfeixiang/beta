@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.entity.Article;
 import com.dong.beta.mapper.UserDao;
+import com.dong.jedis.JedisPoolUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
 
 @RestController
 @Slf4j
@@ -35,6 +37,19 @@ public class TestController {
 
     @Autowired
     StringRedisTemplate redisTemplate;
+
+    @Autowired
+    JedisPoolUtils jedisPool;
+
+
+    @RequestMapping("/jedis")
+    public String testJedis(){
+        Jedis jedis = jedisPool.getJedis();
+        jedis.set("name", "jedis");
+        log.info(jedis.get("name"));
+        return jedis.get("name");
+    }
+
 
     @RequestMapping("/redis")
     public void testRedis(){
