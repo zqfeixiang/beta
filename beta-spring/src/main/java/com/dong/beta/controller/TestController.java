@@ -5,8 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.entity.Article;
 import com.dong.beta.mapper.UserDao;
+import com.dong.jedis.JedisPoolUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -16,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
 
+@Api(tags = "test管理")
 @RestController
 @Slf4j
 public class TestController {
@@ -36,14 +41,29 @@ public class TestController {
     @Autowired
     StringRedisTemplate redisTemplate;
 
-    @RequestMapping("/redis")
+    @Autowired
+    JedisPoolUtils jedisPool;
+
+
+    @ApiOperation("test jedis")
+    @GetMapping("/jedis")
+    public String testJedis(){
+        Jedis jedis = jedisPool.getJedis();
+        jedis.set("name", "jedis");
+        log.info(jedis.get("name"));
+        return jedis.get("name");
+    }
+
+    @ApiOperation("test redis")
+    @GetMapping("/redis")
     public void testRedis(){
         Integer count = Integer.parseInt(redisTemplate.opsForValue().get("name"));
         redisTemplate.opsForValue().decrement("name", 2);
         log.info("count:{}", count);
     }
 
-    @RequestMapping("/testTrans")
+    @ApiOperation("test Transactional")
+    @GetMapping("/testTrans")
     @Transactional
     public void testTrans(){
         jdbcTemplate.execute("insert into t_test values(5, '55')");
@@ -57,6 +77,7 @@ public class TestController {
 //        throw new NullPointerException("error");
     }
 
+    @ApiOperation("test jackson")
     @GetMapping("/testJackson")
     public ResponseModel<String> testJackson(){
         Article book = new Article();

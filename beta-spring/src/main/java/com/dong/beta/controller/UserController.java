@@ -9,6 +9,9 @@ import com.dong.beta.entity.DataListDTO;
 import com.dong.beta.service.CacheService;
 import com.dong.beta.service.impl.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -22,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@Api(tags = "用户管理")
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -35,22 +39,25 @@ public class UserController {
     @Autowired
     CacheService cacheService;
 
-    @RequestMapping("/test")
+    @ApiOperation("test")
+    @GetMapping("/test")
     public void test(){
         log.info("test");
         log.info("articleConfig:{}", articleConfig);
     }
 
+    @ApiOperation("返回用户列表")
     @GetMapping("/listAllUsers")
-    public ResponseModel<PageVo<Map<String, String>>> listAllUsers(@RequestParam(value = "currPage", required = false, defaultValue = "1") Integer currPage,
-                                                                   @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize){
+    public ResponseModel<PageVo<Map<String, String>>> listAllUsers(@ApiParam(value = "当前页") @RequestParam(value = "currPage", required = false, defaultValue = "1") Integer currPage,
+                                                                   @ApiParam(value = "每页大小") @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize){
         List<Map<String, String>> userNameMap = cacheService.queryUserName();
         PageVo pageVo = new PageVo(userNameMap, currPage, pageSize);
         return ResponseModel.successResponse(pageVo);
     }
 
-    @RequestMapping("/queryByUserName")
-    public ResponseModel<List<Users>> queryByUserName(@Param("username") String username) {
+    @ApiOperation("根据用户名查询")
+    @GetMapping("/queryByUserName")
+    public ResponseModel<List<Users>> queryByUserName(@ApiParam(value = "用户名") @RequestParam("username") String username) {
         Assert.notNull(username, "username can not be null");
         List<Users> list = userService.selectUserByName(username);
         if (CollectionUtils.isEmpty(list)){
@@ -62,14 +69,16 @@ public class UserController {
         return ResponseModel.successResponse(list);
     }
 
-    @RequestMapping("/deleteByUserName")
+    @ApiOperation("根据用户名删除")
+    @DeleteMapping("/deleteByUserName")
     @ControllerWebLog(name = "删除用户", intoDb = true)
     public ResponseModel<String> testDelete(@RequestParam("username") String username) {
         userService.deleteService(username);
         return ResponseModel.successResponse(String.format("%s删除成功", username));
     }
 
-    @RequestMapping("/updateByUserName")
+    @ApiOperation("根据用户名更新")
+    @PutMapping("/updateByUserName")
     @ControllerWebLog(name = "更新用户", intoDb = true)
     public ResponseModel<Users> update(@RequestBody Users users){
         DataListDTO dataListDTO = new DataListDTO();

@@ -7,18 +7,22 @@ import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.service.AsyncService;
 import com.dong.beta.service.DemoService;
 import com.google.common.collect.Lists;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Api(tags="Demo")
 @RestController
 @RequestMapping("demo")
 @Slf4j
@@ -59,7 +63,8 @@ public class DemoController {
         return ResponseModel.successResponse(result);
     }
 
-    @RequestMapping("/bonds")
+    @ApiOperation("test bonds")
+    @GetMapping("/bonds")
     public ResponseModel<List<BondCodeVo>> getBonds() {
         System.out.println(demoService.getClass().getName());
         List<BondCodeVo> list = Lists.newArrayList();
@@ -76,31 +81,16 @@ public class DemoController {
         return ResponseModel.successResponse(list);
     }
 
-
-    @RequestMapping("/async")
+    @ApiOperation("test async")
+    @PostMapping("/async")
     public void async() {
         asyncService.executeAsync();
     }
 
-    @RequestMapping("/stat")
-    public Integer stat() {
-        return c;
-    }
-
-    @RequestMapping("/add")
-    public Integer add() {
-        c++;
-        return 1;
-    }
-
-
+    @ApiOperation("test")
     @GetMapping("test")
     public List<ParseRule> test() {
         return demoService.test();
     }
 
-    @GetMapping("test2")
-    public String test2() {
-        return "dong";
-    }
 }
