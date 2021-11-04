@@ -22,6 +22,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +61,20 @@ public class UserController {
     public ResponseModel<List<Users>> queryByUserName(@ApiParam(value = "用户名") @RequestParam("username") String username) {
         Assert.notNull(username, "username can not be null");
         List<Users> list = userService.selectUserByName(username);
+        if (CollectionUtils.isEmpty(list)){
+            return ResponseModel.successResponse(Collections.EMPTY_LIST);
+        }
+        DataListDTO dataListDTO = new DataListDTO();
+        dataListDTO.setDataList(list);
+        dataListDTO.setSize(list.size());
+        return ResponseModel.successResponse(list);
+    }
+
+    @ApiOperation("根据登录时间查询")
+    @GetMapping("/queryByLoginTime")
+    public ResponseModel<List<Users>> queryByLoginTime(@ApiParam(value = "登录时间") @RequestParam("loginTime") Date loginTime) {
+        Assert.notNull(loginTime, "loginTime can not be null");
+        List<Users> list = userService.selectLoginTime(loginTime);
         if (CollectionUtils.isEmpty(list)){
             return ResponseModel.successResponse(Collections.EMPTY_LIST);
         }

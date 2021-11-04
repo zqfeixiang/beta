@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,6 +33,14 @@ public class UserService {
 //    @Cacheable(/*cacheNames = {"users"},*/ key = "#root.args[0]")
     public List<Users> selectUserByName(String userName) {
         List<Users> userList = usersMapper.selectByUserName(userName);
+        if (!CollectionUtils.isEmpty(userList)){
+            return userList;
+        }
+        return null;
+    }
+
+    public List<Users> selectLoginTime(Date loginTime) {
+        List<Users> userList = usersMapper.selectByLoginTime(loginTime);
         if (!CollectionUtils.isEmpty(userList)){
             return userList;
         }

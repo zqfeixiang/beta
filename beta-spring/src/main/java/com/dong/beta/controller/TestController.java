@@ -2,9 +2,13 @@ package com.dong.beta.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.dong.beta.controller.domain.BatchTaskDispatchLog;
+import com.dong.beta.controller.request.BatchTaskDispatchLogRequest;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.entity.Article;
 import com.dong.beta.mapper.UserDao;
+import com.dong.beta.service.BatchTaskDispatchLogService;
+import com.dong.beta.utils.DateUtil;
 import com.dong.jedis.JedisPoolUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,13 +17,17 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 
 @Api(tags = "test管理")
 @RestController
@@ -44,6 +52,34 @@ public class TestController {
     @Autowired
     JedisPoolUtils jedisPool;
 
+    @Autowired
+    BatchTaskDispatchLogService batchTaskDispatchLogService;
+
+    private static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    @ApiOperation(("test Date post method"))
+    @PostMapping("/selectByLogTimeDate")
+    public ResponseModel<List<BatchTaskDispatchLog>> getLog(@RequestBody BatchTaskDispatchLogRequest request){
+        log.info("date time:{}", request.getLogTime());
+        List<BatchTaskDispatchLog> batchTaskDispatchLogs = batchTaskDispatchLogService.selectByLogTime(request.getLogTime());
+
+        return  ResponseModel.successResponse(batchTaskDispatchLogs);
+    }
+
+    @ApiOperation(("test string Date get method"))
+    @GetMapping("/selectByLogTimeStr")
+    public ResponseModel<List<BatchTaskDispatchLog>> getLog(@RequestParam("logTime") String logTime){
+        log.info("selectByLogTimeStr logTime:{}", logTime);
+        List<BatchTaskDispatchLog> batchTaskDispatchLogs = batchTaskDispatchLogService.selectByLogTimeStr(logTime);
+        return  ResponseModel.successResponse(batchTaskDispatchLogs);
+    }
+
+    @ApiOperation(("test Date get method"))
+    @GetMapping("/getAllLog")
+    public ResponseModel<List<BatchTaskDispatchLog>> getAllLog(){
+        List<BatchTaskDispatchLog> batchTaskDispatchLogs = batchTaskDispatchLogService.getAllLog();
+        return  ResponseModel.successResponse(batchTaskDispatchLogs);
+    }
 
     @ApiOperation("test jedis")
     @GetMapping("/jedis")
