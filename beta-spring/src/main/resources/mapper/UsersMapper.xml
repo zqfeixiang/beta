@@ -18,13 +18,19 @@
   </resultMap>
 
   <sql id="column">
-    userid, username, name, jobNum, department, team, createTime
+    userid, username, name, jobNum, department, team, createTime, loginTime
   </sql>
 
   <select id="selectByUserName" resultType="com.dong.beta.controller.domain.Users">
     select
     <include refid="column"></include>
     from users where username like CONCAT(CONCAT('%',#{username}),'%')
+  </select>
+
+  <select id="selectByLoginTime" resultType="com.dong.beta.controller.domain.Users">
+    select
+    <include refid="column"></include>
+    from users where loginTime like CONCAT(CONCAT('%',#{loginTime}),'%')
   </select>
 
   <update id="updateByUserName">

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.beta.mapper.BatchTaskDispatchLogDao">
+    <resultMap id="BaseResultMap" type="com.dong.beta.controller.domain.BatchTaskDispatchLog">
+        <id column="task_id" jdbcType="VARCHAR" property="taskId"/>
+        <result column="event_type" jdbcType="VARCHAR" property="eventType"/>
+        <result column="msg_desc" jdbcType="VARCHAR" property="msgDesc"/>
+        <result column="log_time" jdbcType="TIMESTAMP" javaType="java.util.Date" property="logTime"/>
+    </resultMap>
+
+    <sql id="column">
+        task_id, event_type, msg_desc, log_time
+    </sql>
+
+    <select id="selectByLogTime" resultType="com.dong.beta.controller.domain.BatchTaskDispatchLog">
+        select
+        <include refid="column"></include>
+        from batch_task_dispatch_log
+        <where>
+            <if test="logTime != null">
+                log_time >= #{logTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByLogTimeStr" resultType="com.dong.beta.controller.domain.BatchTaskDispatchLog">
+        select
+        <include refid="column"></include>
+        from batch_task_dispatch_log
+        <where>
+            <if test="logTime != null">
+                log_time >= #{logTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllLog" resultType="com.dong.beta.controller.domain.BatchTaskDispatchLog">
+        select
+        <include refid="column"></include>
+        from batch_task_dispatch_log
+    </select>
+
+</mapper>
