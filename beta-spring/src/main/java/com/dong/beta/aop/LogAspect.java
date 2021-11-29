@@ -49,7 +49,7 @@ public class LogAspect {
         startTime.set(System.currentTimeMillis());
     }
 
-    // 定义需要匹配的切点表达式，同时需要匹配参数
+    // 定义需要匹配的切点表达式，同时方法必须带有参数
     @Around("pointCut() && args(arg)")
     public Object around(ProceedingJoinPoint pjp, String arg) throws Throwable{
         System.out.println("name:" + arg);
