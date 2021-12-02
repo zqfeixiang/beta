@@ -8,6 +8,10 @@
         <module>beta-java</module>
         <module>beta-common</module>
         <module>beta-spring</module>
+        <module>beta-cloud</module>
+        <module>eureka-server</module>
+        <module>eureka-consumer</module>
+        <module>eureka-provider</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
