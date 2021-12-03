@@ -12,6 +12,11 @@ public class HelloController {
 
     @RequestMapping("/provider")
     public String hello(){
+
+        //  测试远程服务发生异常时的情况
+
+        int a = 1 / 0;
+
         System.out.println("hello provider 02 !!!!!!");
         return "hello provider 02";
     }

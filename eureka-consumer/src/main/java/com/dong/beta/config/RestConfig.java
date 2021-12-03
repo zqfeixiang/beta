@@ -22,6 +22,10 @@ public class RestConfig {
         return new RestTemplate();
     }
 
+    /**
+     * 覆盖掉 Ribbon 默认的轮询负载均衡策略
+     * @return
+     */
     @Bean
     public IRule iRule(){
         return new RoundRobinRule();

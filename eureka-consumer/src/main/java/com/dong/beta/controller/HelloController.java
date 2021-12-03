@@ -1,5 +1,8 @@
 package com.dong.beta.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +24,24 @@ public class HelloController {
         System.out.println("consumer hello");
         ResponseEntity<String> entity = restTemplate.getForEntity("http://eureka-provider/provider", String.class);
         return entity.getBody();
+    }
+
+    /**
+     * hystrix 超时时间
+     * @return
+     */
+    @RequestMapping("/hystrix")
+    @HystrixCommand(fallbackMethod = "error", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3500")
+    })
+    public String hystrix(){
+        System.out.println("hystrix");
+//        int a  = 1 / 0;
+        ResponseEntity<String> entity = restTemplate.getForEntity("http://eureka-provider/provider", String.class);
+        return entity.getBody();
+    }
+    public String error(Throwable throwable){
+        System.out.println("error: " + throwable.getMessage());
+        return "hystrix error method";
     }
 }
