@@ -12,6 +12,7 @@
         <module>eureka-server</module>
         <module>eureka-consumer</module>
         <module>eureka-provider</module>
+        <module>service-feign</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
