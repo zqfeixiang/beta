@@ -11,6 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 /**
  * @author dzq
  * @date 2019/06/28
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableTransactionManagement
 //@EnableRabbit
 @EnableAsync
+@EnableSwagger2
 public class BetaSpringApplication {
 
     public static void main(String[] args) {

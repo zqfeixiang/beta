@@ -8,10 +8,10 @@
         <module>beta-java</module>
         <module>beta-common</module>
         <module>beta-spring</module>
-        <module>beta-cloud</module>
         <module>eureka-server</module>
         <module>eureka-consumer</module>
-        <module>eureka-provider</module>
+        <module>eureka-provider01</module>
+        <module>eureka-provider02</module>
         <module>service-feign</module>
     </modules>
     <parent>
@@ -33,6 +33,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.example.beta</groupId>
                 <artifactId>beta-common</artifactId>

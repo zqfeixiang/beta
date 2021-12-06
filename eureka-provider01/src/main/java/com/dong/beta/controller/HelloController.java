@@ -12,11 +12,11 @@ public class HelloController {
 
     @RequestMapping("/provider")
     public String hello(){
-        try {
+        /*try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         System.out.println("hello provider 01 !!!!!!");
         return "hello provider 01 !!!!!!";
     }
