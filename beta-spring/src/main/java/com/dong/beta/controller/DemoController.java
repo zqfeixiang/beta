@@ -4,6 +4,8 @@ import com.dong.aop.DLock;
 import com.dong.beta.controller.domain.ParseRule;
 import com.dong.beta.controller.vo.BondCodeVo;
 import com.dong.beta.controller.vo.ResponseModel;
+import com.dong.beta.enu.RoutingKey;
+import com.dong.beta.rabbit.Producer;
 import com.dong.beta.service.AsyncService;
 import com.dong.beta.service.DemoService;
 import com.google.common.collect.Lists;
@@ -17,6 +19,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -36,11 +39,46 @@ public class DemoController {
     AsyncService asyncService;
 
     @Autowired
+    Producer producer;
+
+    @Autowired
     Redisson redisson;
 
     @Autowired
     StringRedisTemplate redisTemplate;
 
+    @ApiOperation("test RabbitMQ")
+    @GetMapping("/rabbit")
+    public ResponseModel<String> testRabbitMQ(){
+        producer.produceWorkQueue();
+        return ResponseModel.successResponse("Message sent success!");
+    }
+
+    @ApiOperation("test fanout exchange")
+    @GetMapping("/fanoutExchange")
+    public ResponseModel<String> testFanoutExchange(){
+        producer.sendFanoutExchange();
+        return ResponseModel.successResponse("Message sent success!");
+    }
+
+    @ApiOperation("test direct exchange")
+    @PostMapping("/directExchange")
+    public ResponseModel<String> testDirectExchange(@RequestParam("message") String message,
+                                                    @RequestParam("routingKey") RoutingKey routingKey){
+        producer.sendDirectExchange(message, routingKey);
+        return ResponseModel.successResponse("Message sent success!");
+    }
+
+    @ApiOperation("test topic exchange")
+    @PostMapping("/topicExchange")
+    public ResponseModel<String> testTopicExchange(@RequestParam("message") String message,
+                                                    @RequestParam("routingKey") String routingKey){
+        producer.sendTopicExchange(message, routingKey);
+        return ResponseModel.successResponse("Message sent success!");
+    }
+
+    @ApiOperation("test redis")
+    @GetMapping("/redis")
     public ResponseModel<String> testRedis(){
         String result = null;
         String lockKey = "dong";

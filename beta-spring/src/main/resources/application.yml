@@ -16,12 +16,15 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-
   rabbitmq:
     host: 127.0.0.1
     port: 5672
     username: guest
     password: guest
+    listener:
+      simple:
+        prefetch: 1     # 每次只能获取一条消息，处理完才能获取下一个
+
   elasticsearch:
     cluster-nodes: 127.0.0.1:9300
     cluster-name: docker-cluster
@@ -35,19 +38,15 @@ async:
       name:
         prefix: async-service-
 
-
 article:
-   id: 1
-   author: dzq
-   title: Hello
-   content: hello world
-
-
+  id: 1
+  author: dzq
+  title: Hello
+  content: hello world
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.dong.beta.controller.domain
-
 
 #management:
 #  endpoints:

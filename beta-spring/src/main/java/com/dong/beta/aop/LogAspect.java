@@ -36,7 +36,6 @@ public class LogAspect {
 
     @Before(value = "annoationPoint() || pointCut()")
     public void before(JoinPoint joinPoint){
-        System.out.println("方法执行前执行......before");
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         logger.info("<=====================================================");
@@ -52,21 +51,21 @@ public class LogAspect {
     // 定义需要匹配的切点表达式，同时方法必须带有参数
     @Around("pointCut() && args(arg)")
     public Object around(ProceedingJoinPoint pjp, String arg) throws Throwable{
-        System.out.println("name:" + arg);
-        System.out.println("方法环绕start...around");
+        logger.info("方法环绕start...around name:{}", arg);
         String result = null;
         try{
             result = pjp.proceed().toString() + "aop String";
         }catch (Throwable e){
             e.printStackTrace();
         }
-        System.out.println("方法环绕end...around");
+        logger.info("方法环绕end...around");
         return pjp.proceed();
     }
 
     @After("within(com.dong.beta.controller.*Controller)")
     public void after(){
-        System.out.println("方法之后执行...after.");
+        logger.info("方法之后执行...after.");
+        logger.info("==========================================>");
     }
 
     @AfterReturning(pointcut="pointCut()",returning = "rst")
@@ -74,7 +73,7 @@ public class LogAspect {
         if(startTime.get() == null){
             startTime.set(System.currentTimeMillis());
         }
-        System.out.println("方法执行完执行...afterRunning");
+        logger.info("方法执行完执行...afterRunning");
         logger.info("耗时（毫秒）：" +  (System.currentTimeMillis() - startTime.get()));
         logger.info("返回数据：{}", rst);
         logger.info("==========================================>");
