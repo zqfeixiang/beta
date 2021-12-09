@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 public class EsRestClient {
 
-    @Value("${elasticsearch.cluster-nodes}")
+    @Value("${spring.elasticsearch.cluster-nodes}")
     private String address;
 
     @Bean
