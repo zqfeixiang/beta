@@ -115,12 +115,11 @@ public class TestController {
 
     @ApiOperation("test jackson")
     @GetMapping("/testJackson")
-    public ResponseModel<String> testJackson(){
+    public ResponseModel<Object> testJackson(){
         Article book = new Article();
-        String s = null;
         JSONObject jsonObject = null;
         try {
-            s = objectMapper.writeValueAsString(book);
+            String s = objectMapper.writeValueAsString(book);
             jsonObject = JSON.parseObject(s);
             System.out.println("===s: " + s);
         } catch (JsonProcessingException e) {
