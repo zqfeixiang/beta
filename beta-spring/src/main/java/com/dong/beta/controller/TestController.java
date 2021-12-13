@@ -93,8 +93,8 @@ public class TestController {
     @ApiOperation("test redis")
     @GetMapping("/redis")
     public void testRedis(){
-        Integer count = Integer.parseInt(redisTemplate.opsForValue().get("name"));
-        redisTemplate.opsForValue().decrement("name", 2);
+        Integer count = Integer.parseInt(redisTemplate.opsForValue().get("stock"));
+        redisTemplate.opsForValue().decrement("stock", 2);
         log.info("count:{}", count);
     }
 

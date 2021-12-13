@@ -27,7 +27,7 @@ public class TestRedis {
     @Test
     public void test() throws Exception {
         stringRedisTemplate.opsForValue().set("aaa", "222");
-        Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
+        Assert.assertEquals("222", stringRedisTemplate.opsForValue().get("aaa"));
     }
     
     @Test

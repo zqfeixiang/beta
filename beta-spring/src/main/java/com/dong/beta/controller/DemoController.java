@@ -1,6 +1,7 @@
 package com.dong.beta.controller;
 
 import com.dong.aop.DLock;
+import com.dong.beta.annotation.RepeatSubmit;
 import com.dong.beta.controller.domain.ParseRule;
 import com.dong.beta.controller.vo.BondCodeVo;
 import com.dong.beta.controller.vo.ResponseModel;

@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -19,6 +20,7 @@ import java.lang.reflect.Type;
 //@ConditionalOnProperty(name = "aspectOn.bondCodeAspect", matchIfMissing = true)
 @Component
 @Slf4j
+@Order(value = 99)
 public class CodeAspect {
 
     @Pointcut("execution(* com.dong.beta.controller..*.*(..))")
