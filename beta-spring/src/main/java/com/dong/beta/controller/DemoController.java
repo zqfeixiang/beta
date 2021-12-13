@@ -6,6 +6,7 @@ import com.dong.beta.controller.domain.ParseRule;
 import com.dong.beta.controller.vo.BondCodeVo;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.enu.RoutingKey;
+import com.dong.beta.kafka.KafkaProducer;
 import com.dong.beta.rabbit.Producer;
 import com.dong.beta.service.AsyncService;
 import com.dong.beta.service.DemoService;
@@ -47,6 +48,16 @@ public class DemoController {
 
     @Autowired
     StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private KafkaProducer kafkaProducer;
+
+    @ApiOperation("test kafka")
+    @GetMapping("/kafka")
+    public ResponseModel<String> testKafka(@RequestParam("message") String message){
+        kafkaProducer.sendMessage(message);
+        return ResponseModel.successResponse("Message sent success!");
+    }
 
     @ApiOperation("test RabbitMQ")
     @GetMapping("/rabbit")

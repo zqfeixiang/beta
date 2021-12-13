@@ -34,7 +34,7 @@ public class LogAspect {
     @Order(2) // Order 代表优先级，数字越小优先级越高
     public void annoationPoint(){};
 
-    @Before(value = "annoationPoint() || pointCut()")
+     @Before(value = "annoationPoint() || pointCut()")
     public void before(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -52,14 +52,14 @@ public class LogAspect {
     @Around("pointCut() && args(arg)")
     public Object around(ProceedingJoinPoint pjp, String arg) throws Throwable{
         logger.info("方法环绕start...around name:{}", arg);
-        String result = null;
+        Object result = null;
         try{
-            result = pjp.proceed().toString() + "aop String";
+            result = pjp.proceed();
         }catch (Throwable e){
             e.printStackTrace();
         }
         logger.info("方法环绕end...around");
-        return pjp.proceed();
+        return result;
     }
 
     @After("within(com.dong.beta.controller.*Controller)")
