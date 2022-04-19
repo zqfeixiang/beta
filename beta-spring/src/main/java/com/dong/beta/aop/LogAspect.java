@@ -38,13 +38,12 @@ public class LogAspect {
     public void before(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        logger.info("<=====================================================");
+        logger.info("=====================================================");
         logger.info("请求来源： =》" + request.getRemoteAddr());
         logger.info("请求URL：" + request.getRequestURL().toString());
         logger.info("请求方式：" + request.getMethod());
         logger.info("响应方法：" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         logger.info("请求参数：" + Arrays.toString(joinPoint.getArgs()));
-        logger.info("------------------------------------------------------");
         startTime.set(System.currentTimeMillis());
     }
 
@@ -62,14 +61,8 @@ public class LogAspect {
         return result;
     }
 
-    @After("within(com.dong.beta.controller.*Controller)")
-    public void after(){
-        logger.info("方法之后执行...after.");
-        logger.info("==========================================>");
-    }
-
-    @AfterReturning(pointcut="pointCut()",returning = "rst")
-    public void afterRunning(Response rst){
+    @AfterReturning(value="pointCut()",returning = "rst")
+    public void afterRunning(Object rst){
         if(startTime.get() == null){
             startTime.set(System.currentTimeMillis());
         }

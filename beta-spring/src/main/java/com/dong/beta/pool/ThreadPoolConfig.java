@@ -8,7 +8,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableAsync
@@ -42,6 +44,15 @@ public class ThreadPoolConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //执行初始化
         executor.initialize();
+        return executor;
+    }
+
+    @Bean
+    public ThreadPoolExecutor myThreadPoolExecutor(){
+        log.info("=== myThreadPoolExecutor");
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maxPoolSize,
+                60, TimeUnit.SECONDS, new LinkedBlockingDeque<>(10)
+        );
         return executor;
     }
 }

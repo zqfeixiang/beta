@@ -2,6 +2,7 @@ package com.dong.beta.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.dong.beta.config.ArticleConfig;
 import com.dong.beta.controller.domain.BatchTaskDispatchLog;
 import com.dong.beta.controller.request.BatchTaskDispatchLogRequest;
 import com.dong.beta.controller.vo.ResponseModel;
@@ -38,9 +39,6 @@ public class TestController {
     TestController testController;
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     ObjectMapper objectMapper;
 
     @Autowired
@@ -53,9 +51,19 @@ public class TestController {
     JedisPoolUtils jedisPool;
 
     @Autowired
+    ArticleConfig articleConfig;
+
+    @Autowired
     BatchTaskDispatchLogService batchTaskDispatchLogService;
 
     private static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    @ApiOperation("test")
+    @GetMapping("/test")
+    public void test(){
+        log.info("test");
+        log.info("articleConfig:{}", articleConfig);
+    }
 
     @ApiOperation(("test Date post method"))
     @PostMapping("/selectByLogTimeDate")

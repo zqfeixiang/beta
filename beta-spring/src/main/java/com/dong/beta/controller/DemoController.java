@@ -41,53 +41,11 @@ public class DemoController {
     AsyncService asyncService;
 
     @Autowired
-    Producer producer;
-
-    @Autowired
     Redisson redisson;
 
     @Autowired
     StringRedisTemplate redisTemplate;
 
-    @Autowired
-    private KafkaProducer kafkaProducer;
-
-    @ApiOperation("test kafka")
-    @GetMapping("/kafka")
-    public ResponseModel<String> testKafka(@RequestParam("message") String message){
-        kafkaProducer.sendMessage(message);
-        return ResponseModel.successResponse("Message sent success!");
-    }
-
-    @ApiOperation("test RabbitMQ")
-    @GetMapping("/rabbit")
-    public ResponseModel<String> testRabbitMQ(){
-        producer.produceWorkQueue();
-        return ResponseModel.successResponse("Message sent success!");
-    }
-
-    @ApiOperation("test fanout exchange")
-    @GetMapping("/fanoutExchange")
-    public ResponseModel<String> testFanoutExchange(){
-        producer.sendFanoutExchange();
-        return ResponseModel.successResponse("Message sent success!");
-    }
-
-    @ApiOperation("test direct exchange")
-    @PostMapping("/directExchange")
-    public ResponseModel<String> testDirectExchange(@RequestParam("message") String message,
-                                                    @RequestParam("routingKey") RoutingKey routingKey){
-        producer.sendDirectExchange(message, routingKey);
-        return ResponseModel.successResponse("Message sent success!");
-    }
-
-    @ApiOperation("test topic exchange")
-    @PostMapping("/topicExchange")
-    public ResponseModel<String> testTopicExchange(@RequestParam("message") String message,
-                                                    @RequestParam("routingKey") String routingKey){
-        producer.sendTopicExchange(message, routingKey);
-        return ResponseModel.successResponse("Message sent success!");
-    }
 
     @ApiOperation("test redis")
     @GetMapping("/redis")

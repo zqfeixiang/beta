@@ -20,11 +20,14 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "users")
 public class UserService {
-    @Autowired
-    private UserDao userDao;
 
-    @Autowired
-    UsersMapper usersMapper;
+    private final UserDao userDao;
+    private final UsersMapper usersMapper;
+
+    public UserService(UserDao userDao, UsersMapper usersMapper) {
+        this.userDao = userDao;
+        this.usersMapper = usersMapper;
+    }
 
     /**
      * 根据名字查找用户

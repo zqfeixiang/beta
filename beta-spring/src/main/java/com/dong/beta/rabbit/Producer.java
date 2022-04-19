@@ -20,8 +20,11 @@ import java.util.Random;
 @Component
 public class Producer {
 
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+    final RabbitTemplate rabbitTemplate;
+
+    public Producer(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     @Scheduled(cron = "* 0/45 * * * ? ")
     public void produce(){

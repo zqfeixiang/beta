@@ -31,20 +31,14 @@ import java.util.Map;
 @RequestMapping("/user")
 @Slf4j
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+    private final CacheService cacheService;
 
     @Autowired
-    ArticleConfig articleConfig;
-
-    @Autowired
-    CacheService cacheService;
-
-    @ApiOperation("test")
-    @GetMapping("/test")
-    public void test(){
-        log.info("test");
-        log.info("articleConfig:{}", articleConfig);
+    public UserController(UserService userService, CacheService cacheService) {
+        this.userService = userService;
+        this.cacheService = cacheService;
     }
 
     @ApiOperation("返回用户列表")
@@ -58,6 +52,7 @@ public class UserController {
 
     @ApiOperation("根据用户名查询")
     @GetMapping("/queryByUserName")
+    @ControllerWebLog(name = "根据用户名查询用户", intoDb = true)
     public ResponseModel<List<Users>> queryByUserName(@ApiParam(value = "用户名") @RequestParam("username") String username) {
         Assert.notNull(username, "username can not be null");
         List<Users> list = userService.selectUserByName(username);

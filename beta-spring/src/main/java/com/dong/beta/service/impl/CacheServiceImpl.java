@@ -8,6 +8,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+
+import org.quartz.spi.ThreadPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +42,9 @@ public class CacheServiceImpl implements CacheService {
     @Autowired
     private Executor customThreadPool;
 
+    @Autowired
+    private ThreadPoolExecutor myThreadPoolExecutor;
+
     private Map<String, String> userNameCache = Maps.newHashMap();
 
     private List<Map<String, String>> userNameCacheList = Lists.newArrayList();
@@ -48,6 +54,10 @@ public class CacheServiceImpl implements CacheService {
     @DLock("dong")
     @Override
     public void init() {
+        myThreadPoolExecutor.execute(() -> {
+            log.info("myThreadPoolExecutor execute");
+        });
+
         CompletableFuture.runAsync(() -> {
             initUserName();
         }, customThreadPool);

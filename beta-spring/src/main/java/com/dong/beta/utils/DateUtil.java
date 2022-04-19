@@ -1,11 +1,13 @@
 package com.dong.beta.utils;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -58,5 +60,16 @@ public class DateUtil {
         return java.util.Date
                 .from(dateToConvert.atZone(ZoneId.systemDefault())
                         .toInstant());
+    }
+
+    public static Timestamp getUTCTimestamp(){
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime utc = ZonedDateTime.of(ldt, ZoneId.of("UTC"));
+        Timestamp timestamp = Timestamp.valueOf(utc.toLocalDateTime());
+        return timestamp;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getUTCTimestamp());
     }
 }
