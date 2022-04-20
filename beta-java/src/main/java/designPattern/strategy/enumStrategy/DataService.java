@@ -1,4 +1,4 @@
-package pattern.strategy.enumStrategy;
+package designPattern.strategy.enumStrategy;
 
 import com.google.common.collect.Lists;
 

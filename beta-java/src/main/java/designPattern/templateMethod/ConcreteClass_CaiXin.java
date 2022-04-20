@@ -1,4 +1,4 @@
-package pattern.templateMethod;
+package designPattern.templateMethod;
 
 //炒蒜蓉菜心的类
 public class ConcreteClass_CaiXin extends AbstractTemplate {

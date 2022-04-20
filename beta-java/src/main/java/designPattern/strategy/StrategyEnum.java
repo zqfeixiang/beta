@@ -1,4 +1,4 @@
-package pattern.strategy;
+package designPattern.strategy;
 
 public enum  StrategyEnum {
     ADD {

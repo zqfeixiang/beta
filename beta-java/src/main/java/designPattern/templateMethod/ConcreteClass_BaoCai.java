@@ -1,5 +1,5 @@
-package pattern.templateMethod;
-import pattern.templateMethod.AbstractTemplate;
+package designPattern.templateMethod;
+import designPattern.templateMethod.AbstractTemplate;
 
 //炒手撕包菜的类
 public class ConcreteClass_BaoCai extends AbstractTemplate{

@@ -1,4 +1,4 @@
-package pattern.templateMethod;
+package designPattern.templateMethod;
 
 public abstract class AbstractTemplate {
 

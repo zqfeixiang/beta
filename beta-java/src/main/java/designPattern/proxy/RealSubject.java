@@ -1,4 +1,4 @@
-package pattern.proxy;
+package designPattern.proxy;
 
 public class RealSubject implements Subject{
 

@@ -1,10 +1,8 @@
-package pattern.strategy.enumStrategy;
+package designPattern.strategy.enumStrategy;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import javax.annotation.Resource;
 
 @Service
 public class RankServiceImpl {

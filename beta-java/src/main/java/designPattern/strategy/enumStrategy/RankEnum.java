@@ -1,4 +1,4 @@
-package pattern.strategy.enumStrategy;
+package designPattern.strategy.enumStrategy;
 
 import java.util.Comparator;
 import java.util.List;
