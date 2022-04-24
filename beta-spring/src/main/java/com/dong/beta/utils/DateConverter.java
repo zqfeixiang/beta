@@ -1,4 +1,4 @@
-package com.dong.beta.config;
+package com.dong.beta.utils;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.StringUtils;

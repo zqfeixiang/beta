@@ -1,11 +1,10 @@
 package com.dong.beta.inteceptor;
 
-import com.dong.beta.config.DateConverter;
+import com.dong.beta.utils.DateConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.convert.support.GenericConversionService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 

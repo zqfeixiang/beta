@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class InsertServiceImpl implements InsertService{
 
-    @Autowired
-    InsertStrategyContext insertStrategyContext;
+    private final InsertStrategyContext insertStrategyContext;
+
+    public InsertServiceImpl(InsertStrategyContext insertStrategyContext) {
+        this.insertStrategyContext = insertStrategyContext;
+    }
 
     @Override
     public void insert(InsertTypeEnum insertTypeEnum, String date) {

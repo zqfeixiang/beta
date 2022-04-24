@@ -1,6 +1,7 @@
 package com.dong.beta.controller.vo;
 
 import com.dong.beta.constants.ResultCodeEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

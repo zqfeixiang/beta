@@ -1,7 +1,7 @@
 package com.dong.beta.controller;
 
 import com.dong.beta.controller.vo.ResponseModel;
-import com.dong.beta.enu.RoutingKey;
+import com.dong.beta.constants.RoutingKey;
 import com.dong.beta.rabbit.Producer;
 
 import org.springframework.beans.factory.annotation.Autowired;

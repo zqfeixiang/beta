@@ -18,8 +18,11 @@ import java.util.List;
 @Slf4j
 public class InsertController {
 
-    @Autowired
-    InsertService insertService;
+    final InsertService insertService;
+
+    public InsertController(InsertService insertService) {
+        this.insertService = insertService;
+    }
 
     @ApiOperation("insert")
     @PostMapping("/insert")

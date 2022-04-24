@@ -3,10 +3,9 @@ package com.dong.beta.rabbit;
 import com.google.common.collect.Lists;
 
 import com.dong.beta.entity.Book;
-import com.dong.beta.enu.RoutingKey;
+import com.dong.beta.constants.RoutingKey;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

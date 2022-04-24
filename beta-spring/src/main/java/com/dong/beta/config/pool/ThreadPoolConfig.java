@@ -1,4 +1,4 @@
-package com.dong.beta.pool;
+package com.dong.beta.config.pool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

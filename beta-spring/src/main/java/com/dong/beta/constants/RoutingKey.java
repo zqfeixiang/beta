@@ -1,4 +1,4 @@
-package com.dong.beta.enu;
+package com.dong.beta.constants;
 
 /**
  * @author dzq

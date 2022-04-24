@@ -1,13 +1,8 @@
 package com.dong.beta.controller;
 
-import com.dong.aop.DLock;
-import com.dong.beta.annotation.RepeatSubmit;
 import com.dong.beta.controller.domain.ParseRule;
 import com.dong.beta.controller.vo.BondCodeVo;
 import com.dong.beta.controller.vo.ResponseModel;
-import com.dong.beta.enu.RoutingKey;
-import com.dong.beta.kafka.KafkaProducer;
-import com.dong.beta.rabbit.Producer;
 import com.dong.beta.service.AsyncService;
 import com.dong.beta.service.DemoService;
 import com.google.common.collect.Lists;
@@ -21,7 +16,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
