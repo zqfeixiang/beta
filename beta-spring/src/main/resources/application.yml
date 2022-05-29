@@ -8,6 +8,9 @@ spring:
     url: jdbc:mysql://localhost/pomp_test?useUnicode=true&characterEncoding=utf-8
     username: root
     password: password01!
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
   application:
     name: beta-spring
   main:

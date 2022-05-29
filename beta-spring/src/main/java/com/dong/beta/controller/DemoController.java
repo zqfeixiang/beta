@@ -27,19 +27,17 @@ import java.util.List;
 @Slf4j
 public class DemoController {
 
-    static Integer c = 0;
-    //    @Resource(name = "demoservice2")
-    @Autowired
-    private DemoService demoService;
-    @Autowired
-    AsyncService asyncService;
+    private final DemoService demoService;
+    private final AsyncService asyncService;
+    private final Redisson redisson;
+    private final StringRedisTemplate redisTemplate;
 
-    @Autowired
-    Redisson redisson;
-
-    @Autowired
-    StringRedisTemplate redisTemplate;
-
+    public DemoController(DemoService demoService, AsyncService asyncService, Redisson redisson, StringRedisTemplate redisTemplate) {
+        this.demoService = demoService;
+        this.asyncService = asyncService;
+        this.redisson = redisson;
+        this.redisTemplate = redisTemplate;
+    }
 
     @ApiOperation("test redis")
     @GetMapping("/redis")

@@ -58,9 +58,7 @@ public class CacheServiceImpl implements CacheService {
             log.info("myThreadPoolExecutor execute");
         });
 
-        CompletableFuture.runAsync(() -> {
-            initUserName();
-        }, customThreadPool);
+        CompletableFuture.runAsync(this::initUserName, customThreadPool);
     }
 
     private void initUserName() {

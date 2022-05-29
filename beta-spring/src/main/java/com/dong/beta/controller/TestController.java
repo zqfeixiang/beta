@@ -7,6 +7,7 @@ import com.dong.beta.controller.domain.BatchTaskDispatchLog;
 import com.dong.beta.controller.request.BatchTaskDispatchLogRequest;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.entity.Article;
+import com.dong.beta.mapper.PartyDoMapper;
 import com.dong.beta.mapper.UserDao;
 import com.dong.beta.service.BatchTaskDispatchLogService;
 import com.dong.beta.utils.DateUtil;
@@ -56,7 +57,18 @@ public class TestController {
     @Autowired
     BatchTaskDispatchLogService batchTaskDispatchLogService;
 
+    @Autowired
+    PartyDoMapper partyDoMapper;
+
     private static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    @ApiOperation("put version")
+    @PutMapping("/updateVersion")
+    public String updateVersion(){
+        log.info("updateVersion");
+        partyDoMapper.updateVersion(100);
+        return "success";
+    }
 
     @ApiOperation("test")
     @GetMapping("/test")

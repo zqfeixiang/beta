@@ -22,7 +22,7 @@ public class HelloController {
     @RequestMapping("/hello")
     public String hello(){
         System.out.println("consumer hello");
-        ResponseEntity<String> entity = restTemplate.getForEntity("http://eureka-provider/provider", String.class);
+        ResponseEntity<String> entity = restTemplate.getForEntity("http://{serviceBHost}/insertData", String.class);
         return entity.getBody();
     }
 
