@@ -52,9 +52,6 @@ public class TestController {
     JedisPoolUtils jedisPool;
 
     @Autowired
-    ArticleConfig articleConfig;
-
-    @Autowired
     BatchTaskDispatchLogService batchTaskDispatchLogService;
 
     @Autowired
@@ -68,13 +65,6 @@ public class TestController {
         log.info("updateVersion");
         partyDoMapper.updateVersion(100);
         return "success";
-    }
-
-    @ApiOperation("test")
-    @GetMapping("/test")
-    public void test(){
-        log.info("test");
-        log.info("articleConfig:{}", articleConfig);
     }
 
     @ApiOperation(("test Date post method"))

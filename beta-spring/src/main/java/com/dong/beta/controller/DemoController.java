@@ -1,17 +1,15 @@
 package com.dong.beta.controller;
 
+import com.google.common.collect.Lists;
+
 import com.dong.beta.controller.domain.ParseRule;
 import com.dong.beta.controller.vo.BondCodeVo;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.dong.beta.service.AsyncService;
 import com.dong.beta.service.DemoService;
-import com.google.common.collect.Lists;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
+
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Api(tags="Demo")
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+
+@Api(tags = "Demo")
 @RestController
 @RequestMapping("demo")
 @Slf4j
@@ -41,7 +43,7 @@ public class DemoController {
 
     @ApiOperation("test redis")
     @GetMapping("/redis")
-    public ResponseModel<String> testRedis(){
+    public ResponseModel<String> testRedis() {
         String result = null;
         String lockKey = "dong";
         RLock redissonLock = redisson.getLock(lockKey);
@@ -49,14 +51,14 @@ public class DemoController {
         try {
             redissonLock.lock();
             int stock = Integer.parseInt(redisTemplate.opsForValue().get("stock"));
-            if (stock > 0){
+            if (stock > 0) {
                 int realStock = stock - 1;
                 redisTemplate.opsForValue().set("stock", realStock + "");
                 log.info("扣减库存成功，剩余:{}", realStock);
-            }else {
+            } else {
                 log.info("库存不足");
             }
-        }finally {
+        } finally {
             redissonLock.unlock();
         }
 
