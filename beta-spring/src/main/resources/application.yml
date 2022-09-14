@@ -84,7 +84,8 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
-#
+  level: debug
+
 #logging:
 #  level:
 #    com.dong.beta.mapper: debug

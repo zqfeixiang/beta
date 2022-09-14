@@ -1,20 +1,18 @@
 package com.dong.beta.controller;
 
-import com.dong.beta.controller.domain.model.City;
-import com.dong.beta.controller.domain.model.Province;
-import com.dong.beta.controller.domain.model.ZipCode;
 import com.dong.beta.controller.domain.model.Address;
 import com.dong.beta.controller.domain.model.Car;
+import com.dong.beta.controller.domain.model.City;
+import com.dong.beta.controller.domain.model.House;
 import com.dong.beta.controller.domain.model.Person;
 import com.dong.beta.controller.domain.model.PersonDO;
-import com.dong.beta.controller.domain.model.House;
+import com.dong.beta.controller.domain.model.Province;
+import com.dong.beta.controller.domain.model.ZipCode;
 import com.dong.beta.controller.vo.ResponseModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
-import com.oracle.tools.packager.Log;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,10 +41,17 @@ public class PrintController {
     private String key;
     private Object value;
 
+    @ApiOperation("print DO")
+    @GetMapping("/printDO")
+    public ResponseModel<PersonDO> printDO() {
+        PersonDO personDO = buildPersonDO();
+        return ResponseModel.successResponse(personDO);
+    }
+
     @ApiOperation("打印类指定属性的value")
     @GetMapping("/printModelProperty")
     public ResponseModel<Map<String, Object>> printModelProperty(@ApiParam(value = "House") @RequestParam String concept,
-                                                    @ApiParam("blockCode") @RequestParam String attribute) throws Exception {
+                                                                 @ApiParam("blockCode") @RequestParam String attribute) throws Exception {
         Map<String, Object> map = new HashMap<>();
         PersonDO personDO = buildPersonDO();
         Person person = personDO.getPerson();
@@ -102,7 +107,7 @@ public class PrintController {
     private void printNode(JsonNode node, String fieldName, StringBuilder builder) {
         if (traversable(node)) {
             builder.append(fieldName).append(".");
-        }else {
+        } else {
             builder.append(fieldName);
             if (builder.toString().toLowerCase().contains(key.toLowerCase())) {
                 getValue(node);
@@ -114,7 +119,7 @@ public class PrintController {
     private void getValue(JsonNode node) {
         if (node.getNodeType() == JsonNodeType.STRING) {
             value = node.textValue();
-        }else if(node.getNodeType() == JsonNodeType.NUMBER) {
+        } else if (node.getNodeType() == JsonNodeType.NUMBER) {
             value = node.numberValue();
         }
     }
