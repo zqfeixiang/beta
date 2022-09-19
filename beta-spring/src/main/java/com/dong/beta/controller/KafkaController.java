@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022/4/9 10:23 上午
  */
 @Api(tags = "Kafka管理")
-@RestController
+//@RestController
 @Slf4j
 public class KafkaController {
 

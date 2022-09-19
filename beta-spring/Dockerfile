@@ -1,10 +1,11 @@
-FROM java:openjdk-8-jdk-alpine
+FROM openjdk:11-jre
+MAINTAINER David Dong
+
 VOLUME /tmp
-ADD target/beta-spring-0.0.1-SNAPSHOT.jar app.jar
 
-#设置alpine系统时区
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
 
-EXPOSE 9090
-ENTRYPOINT [ "java", "-jar", "/app.jar" ]
+ENTRYPOINT ["java","-cp","app:app/lib/*","-Dspring.profiles.active=docker","com.dong.beta.BetaSpringApplication"]

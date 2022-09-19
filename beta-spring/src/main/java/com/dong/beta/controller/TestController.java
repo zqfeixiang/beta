@@ -131,7 +131,7 @@ public class TestController {
         try {
             String s = objectMapper.writeValueAsString(book);
             jsonObject = JSON.parseObject(s);
-            System.out.println("===s: " + s);
+            log.info("===s: " + s);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

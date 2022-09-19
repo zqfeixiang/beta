@@ -1,4 +1,4 @@
-package com.dong.beta.aop;
+package com.dong.beta.annotation;
 
 import com.dong.beta.config.jackson.JacksonConfig;
 import org.springframework.context.annotation.Import;

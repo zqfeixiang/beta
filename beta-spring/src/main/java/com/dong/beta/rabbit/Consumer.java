@@ -20,32 +20,32 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class Consumer {
-    @RabbitListener(queues = "dong.news")
+    @RabbitListener(queuesToDeclare = @Queue("dong.news"))
     public void receiveMsg(String msg){
         log.info("consumer received msg: {}", msg);
     }
 
-    @RabbitListener(queues = "dong.book")
+    @RabbitListener(queuesToDeclare = @Queue("dong.book"))
     public void receive(Book book){
         log.info("收到消息：{}", book);
     }
 
-    @RabbitListener(queues = "dong.work")
+    @RabbitListener(queuesToDeclare = @Queue("dong.work"))
     public void receiveWork1(String message){
         log.info("消费者1收到消息：{}, {}", message, LocalTime.now());
     }
 
-    @RabbitListener(queues = "dong.work")
+    @RabbitListener(queuesToDeclare = @Queue("dong.work"))
     public void receiveWork2(String message){
         log.error("消费者2收到消息：{}, {}", message, LocalTime.now());
     }
 
-    @RabbitListener(queues = "fanout.queue1")
+    @RabbitListener(queuesToDeclare = @Queue("fanout.queue1"))
     public void receiveFanoutQueue1(String message){
         log.error("收到 fanout queue1 消息：{}, {}", message, LocalTime.now());
     }
 
-    @RabbitListener(queues = "fanout.queue2")
+    @RabbitListener(queuesToDeclare = @Queue("fanout.queue2"))
     public void receiveFanoutQueue2(String message){
         log.error("收到 fanout queue2 消息：{}, {}", message, LocalTime.now());
     }

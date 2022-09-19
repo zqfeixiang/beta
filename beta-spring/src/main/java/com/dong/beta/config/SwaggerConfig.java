@@ -35,9 +35,9 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.dong.beta.controller"))
                 //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
-                .build()
-                .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts());
+                .build();
+//                .securitySchemes(securitySchemes())
+//                .securityContexts(securityContexts());
     }
     
     private ApiInfo apiInfo(){
@@ -51,16 +51,16 @@ public class SwaggerConfig {
 
     /**
      * 认证的安全上下文
-     */
+     *//*
     private List<SecurityScheme> securitySchemes() {
         List<SecurityScheme> securitySchemes = new ArrayList<>();
         securitySchemes.add(new ApiKey("Authorization", "Authorization", "header"));
         return securitySchemes;
     }
 
-    /**
+    *//**
      * 授权信息全局应用
-     */
+     *//*
     private List<SecurityContext> securityContexts() {
         List<SecurityContext> securityContexts = new ArrayList<>();
         securityContexts.add(SecurityContext.builder()
@@ -76,5 +76,5 @@ public class SwaggerConfig {
         List<SecurityReference> securityReferences = new ArrayList<>();
         securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
         return securityReferences;
-    }
+    }*/
 }

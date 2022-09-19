@@ -22,14 +22,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @MapperScan("com.dong.beta.mapper")
-@RestController
 @EnableScheduling
 @EnableCaching
 @EnableTransactionManagement
-@EnableRabbit
 //@EnableKafka
-@EnableAsync
-@EnableSwagger2
 public class BetaSpringApplication {
 
     public static void main(String[] args) {

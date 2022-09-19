@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author dzq
  * @date 2021/12/10 5:59 下午
  */
-@Component
+//@Component
 @Slf4j
 public class KafkaProducer {
     private final KafkaTemplate<String, Object> kafkaTemplate;
