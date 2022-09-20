@@ -5,9 +5,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.30.0.1:3366/pomp_test?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
     username: root
-    password: password01!
+    password: 123456
     hikari:
       maximum-pool-size: 3
       minimum-idle: 1

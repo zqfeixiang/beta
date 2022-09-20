@@ -49,14 +49,24 @@ services:
     container_name: mysql # 指定容器名称，如果不设置此参数，则由系统自动生成
     restart: always # 设置容器自启模式
     env_file: ./.env
+    # docker安全验证
+    security_opt:
+      - seccomp:unconfined
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # 设置utf8字符集
     environment:
       - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
+      - LANG=C.UTF-8
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     volumes:
       - /etc/localtime:/etc/localtime:ro # 设置容器时区与宿主机保持一致
+      - ./db/mysql:/var/lib/mysql:rw
+      # 数据库初始化脚本，当Mysql容器首次启动时，会在 /docker-entrypoint-initdb.d目录下扫描
+      # .sh，.sql，.sql.gz类型的文件。如果这些类型的文件存在，将执行它们来初始化一个数据库；
+      - ./script/init:/docker-entrypoint-initdb.d/
+      - ./script/table:/opt/sql
     ports:
+      # 宿主机：容器
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
 
   beta-spring:
@@ -106,4 +116,3 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
