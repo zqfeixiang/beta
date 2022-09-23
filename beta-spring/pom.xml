@@ -229,9 +229,6 @@
         <profile>
             <!-- 本地开发环境 -->
             <id>local</id>
-            <properties>
-                <profiles.active>local</profiles.active>
-            </properties>
             <activation>
                 <!-- 设置默认激活这个配置 -->
                 <activeByDefault>true</activeByDefault>
@@ -240,9 +237,6 @@
         <profile>
             <!-- docker -->
             <id>docker</id>
-            <properties>
-                <profiles.active>docker</profiles.active>
-            </properties>
         </profile>
     </profiles>
 

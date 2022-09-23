@@ -55,6 +55,11 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer #关键字的序列化类
       value-serializer: org.apache.kafka.common.serialization.StringSerializer #值的序列化类
     topic: dzq
+  cache:
+    cache-names: users
+    caffeine:
+      spec: maximumSize=1000,expireAfterAccess=10s
+
 
 async:
   executor:

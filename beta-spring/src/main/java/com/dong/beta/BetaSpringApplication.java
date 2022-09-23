@@ -1,19 +1,11 @@
 package com.dong.beta;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.bind.annotation.RestController;
-
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author dzq
@@ -23,7 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @MapperScan("com.dong.beta.mapper")
 @EnableScheduling
-@EnableCaching
 @EnableTransactionManagement
 //@EnableKafka
 public class BetaSpringApplication {

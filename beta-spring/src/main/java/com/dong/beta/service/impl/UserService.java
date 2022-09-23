@@ -5,20 +5,16 @@ import com.dong.beta.controller.domain.Users;
 import com.dong.beta.mapper.UserDao;
 import com.dong.beta.mapper.UsersMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "users")
 public class UserService {
 
     private final UserDao userDao;
@@ -33,28 +29,19 @@ public class UserService {
      * 根据名字查找用户
      *  keyGenerator = "myKeyGenerator"
      */
-//    @Cacheable(/*cacheNames = {"users"},*/ key = "#root.args[0]")
+    @Cacheable(cacheNames = "users", key = "#userName")
     public List<Users> selectUserByName(String userName) {
-        List<Users> userList = usersMapper.selectByUserName(userName);
-        if (!CollectionUtils.isEmpty(userList)){
-            return userList;
-        }
-        return null;
+        return usersMapper.selectByUserName(userName);
     }
 
     public List<Users> selectLoginTime(Date loginTime) {
-        List<Users> userList = usersMapper.selectByLoginTime(loginTime);
-        if (!CollectionUtils.isEmpty(userList)){
-            return userList;
-        }
-        return null;
+        return usersMapper.selectByLoginTime(loginTime);
     }
 
     @CachePut(/*value = "users", */key = "#users.username")
     public List<Users> updateByUserName(Users users){
         usersMapper.updateByUserName(users);
-        List<Users> userList = usersMapper.selectByUserName(users.getUsername());
-        return userList;
+        return usersMapper.selectByUserName(users.getUsername());
     }
 
     /**
