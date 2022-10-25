@@ -1,29 +1,41 @@
 package learning;
 
-import net.bytebuddy.asm.Advice;
-
 import org.junit.Test;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjuster;
-import java.time.temporal.TemporalAdjusters;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class JUnitTest {
+
+    @Test
+    public void testSimpleDateFormat(){
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date parse = sdf.parse("2022-10-17");
+            System.out.println(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testSimpleDateFormat2(){
+        DateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.US);
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date parse = sdf.parse("2022-10-17");
+            System.out.println(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testDateCompare() throws Exception {

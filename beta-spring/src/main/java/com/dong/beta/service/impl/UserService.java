@@ -5,6 +5,8 @@ import com.dong.beta.controller.domain.Users;
 import com.dong.beta.mapper.UserDao;
 import com.dong.beta.mapper.UsersMapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     private final UserDao userDao;
     private final UsersMapper usersMapper;
@@ -31,6 +34,7 @@ public class UserService {
      */
     @Cacheable(cacheNames = "users", key = "#userName")
     public List<Users> selectUserByName(String userName) {
+        LOGGER.info("query by username:{}", userName);
         return usersMapper.selectByUserName(userName);
     }
 
