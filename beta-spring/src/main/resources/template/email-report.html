@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:item="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:remove="all">Template for HTML email</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>
+    Hello, <span th:text="${name}">Peter Static</span>!
+</p>
+
+<div>
+    <table border="1">
+        <tr th:each="item: ${props}">
+            <td>
+                <span th:text="${item.key}" style="font-weight:bold;"></span>
+            </td>
+            <td>
+                <span th:text="${item.value}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p th:if="${name.length() > 10}">
+    Wow! You've got a long name (more than 10 chars)!
+</p>
+<p>
+    You have been successfully subscribed to the <b>CodingNConcepts</b> on
+    <span th:text="${subscriptionDate}">28-12-2012</span>
+</p>
+<p>We write on following technologies:-</p>
+<ul th:remove="all-but-first">
+    <li th:each="tech : ${technologies}" th:text="${tech}">Java</li>
+    <li>JavaScript</li>
+    <li>CSS</li>
+</ul>
+
+<div th:if="${not#lists.isEmpty(articles)}">
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>List</th>
+            <th>Content</th>
+        </tr>
+        <tr th:each="c:${articles}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.author}"></td>
+            <td th:text="${c.title}"></td>
+            <td th:text="${c.list}"></td>
+            <td th:text="${c.content}"></td>
+        </tr>
+    </table>
+</div>
+<p>
+    Regards, <br/>
+    <em>The CodingNConcepts Team</em>
+</p>
+</body>
+</html>
