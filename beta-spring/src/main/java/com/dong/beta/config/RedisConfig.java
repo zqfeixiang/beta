@@ -61,6 +61,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     public Redisson redisson(){
         Config config = new Config();
         config.useSingleServer().setAddress("redis://" + redisHost + ":6379").setDatabase(0);
+        config.setLockWatchdogTimeout(30000);
 //        config.useSingleServer().setAddress("redis://localhost:6379").setDatabase(0);
         return (Redisson) Redisson.create(config);
     }
