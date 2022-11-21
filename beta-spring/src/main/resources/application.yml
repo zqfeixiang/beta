@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost/pomp_test?useUnicode=true&characterEncoding=utf-8
     username: root
-    password: password01!
+    password: #password
     hikari:
       maximum-pool-size: 3
       minimum-idle: 1
@@ -60,6 +60,17 @@ spring:
     caffeine:
       spec: maximumSize=1000,expireAfterAccess=10s
 
+  mail:
+    host: smtp.163.com
+    port: 25
+    username: #your email address
+    password: #auth code
+
+app:
+  mail:
+    from-address: #email address
+    to-address: #email address
+    cc-address: #email address
 
 async:
   executor:
