@@ -13,6 +13,8 @@
         <module>eureka-provider01</module>
         <module>eureka-provider02</module>
         <module>service-feign</module>
+        <module>beta-desigin-pattern</module>
+        <module>beta-gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

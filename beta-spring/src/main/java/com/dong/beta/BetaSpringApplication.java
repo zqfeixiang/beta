@@ -39,7 +39,7 @@ public class BetaSpringApplication {
         article1.setList(Lists.newArrayList("1", "2"));
         article1.setContent("article1");
         articleList.add(article1);
-        emailSender.sendEmail(articleList);
+        //emailSender.sendEmail(articleList);
     }
 
 }

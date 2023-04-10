@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author dzq
- * @date 2022/4/19 8:58 下午
+ * @since 2022/4/19 8:58 下午
  */
 public interface Strategy {
     List<Stock> sort(List<Stock> source);
