@@ -91,12 +91,12 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.dong.beta.controller.domain
 
-#management:
-#  endpoints:
-#    web:
-#      base-path: /actuator
-#      exposure:
-#        include: "*"
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
 
 logging:
   config: classpath:logback-spring.xml
